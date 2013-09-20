@@ -30,18 +30,20 @@ def _setup():
     global _channel
     _channel = int(config['pins']['pin_num'])
     mode = config['pins']['mode']
-    GPIO.setmode(GPIO.BVM if mode == 'BCM' else GPIO.BOARD)
-    GPIO.setup(_channel, GPIO.IN)
+    GPIO.setmode(GPIO.BCM if mode.upper() == 'BCM' else GPIO.BOARD)
+    GPIO.setup(_channel, GPIO.IN, GPIO.PUD_DOWN)
     _last_state = _door_state(_read_pin_avg())
 
-def _read_pin_avg(n=1000):
+def _read_pin_avg(n=1000, ch=None):
     """
         Averages the value from the pin and then
         returns the rounded result (zero or one)
     """
+    if not ch:
+        ch = _channel
     sum_ = 0
     for i in range(n-1):
-        sum_ += GPIO.input(_channel)
+        sum_ += GPIO.input(ch)
     return 1 if sum_ > n//2 else 0
 
 def _door_state(pin_avg):
@@ -66,13 +68,9 @@ def wait_for_event():
     
     while True:
         avg = _read_pin_avg()
-        print(avg)
         if avg == target_state:
             break
     
     return _last_state
-
-def _debug():
-
 
 _setup()

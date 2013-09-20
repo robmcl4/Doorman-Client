@@ -13,7 +13,7 @@ def _record(type_):
     """
     conn = connection.get_conn()
     curs = conn.cursor()
-    curs.execute("insert into events (type) values (%s)", type_)
+    curs.execute("insert into events (type) values (%s)", (type_,))
     curs.close()
     conn.commit()
 

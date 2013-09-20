@@ -11,7 +11,7 @@
   Author: Robert McLaughlin
 """
 
-from configparser import SafeConfigParser
+from ConfigParser import SafeConfigParser
 import os
 import logging
 
