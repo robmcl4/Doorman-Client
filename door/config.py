@@ -6,6 +6,7 @@
 
   Expected config.cfg structure:
   [mysql]: user, pass, host, port, database
+  [pins]: pin_num, mode
   
   Author: Robert McLaughlin
 """

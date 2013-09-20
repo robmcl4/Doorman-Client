@@ -10,6 +10,7 @@ from door import detector
 from door.db import event
 
 # main detection loop
+print("detecting ...")
 while True:
     ev = detector.wait_for_event()
     if ev == detector.DOOR_OPEN:

@@ -5,7 +5,7 @@
   
   Author: Robert McLaughlin
 """
-from door.models import connection
+from door.db import connection
 
 def _record(type_):
     """

@@ -13,9 +13,13 @@ def _connect():
     host  = section['host']
     port  = section['port']
     
-    _conn = connector.connect(user=user
+    _conn = connector.connect(user=user, 
+                              passwd=pass_, 
+                              db=db, 
+                              host=host, 
+                              port=port)
 
 def get_conn():
-    if not conn or not conn.ping():
+    if not _conn or not _conn.ping():
         _connect()
     return conn

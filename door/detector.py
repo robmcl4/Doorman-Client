@@ -22,14 +22,15 @@ except RuntimeError:
 
 
 DOOR_OPEN, DOOR_CLOSE = range(2)
-_channel = 2
+_channel = 0
 _last_state = None
 
 def _setup():
     global _last_state
     global _channel
-    _channel = config['pins']['pin_num']
-    GPIO.setmode(GPIO.BCM)
+    _channel = int(config['pins']['pin_num'])
+    mode = config['pins']['mode']
+    GPIO.setmode(GPIO.BVM if mode == 'BCM' else GPIO.BOARD)
     GPIO.setup(_channel, GPIO.IN)
     _last_state = _door_state(_read_pin_avg())
 
@@ -65,9 +66,13 @@ def wait_for_event():
     
     while True:
         avg = _read_pin_avg()
+        print(avg)
         if avg == target_state:
             break
     
     return _last_state
+
+def _debug():
+
 
 _setup()
