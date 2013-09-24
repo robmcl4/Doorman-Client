@@ -31,6 +31,6 @@ def _connect():
                               ssl_verify_cert=True)
 
 def get_conn():
-    if not _conn or not _conn.ping():
+    if not _conn or not _conn.is_connected():
         _connect()
     return _conn
