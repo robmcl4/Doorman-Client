@@ -44,3 +44,5 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         logger.info("Shutting down ...")
+    except Exception, e:
+        logging.exception(e)
