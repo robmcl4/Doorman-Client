@@ -39,10 +39,18 @@ def main():
             logger.info("Close")
             event.record_close()
 
+def try_main():
+    """
+        Run main() forever, ignoring exceptions
+    """
+    while True:
+        try:
+            main()
+        except KeyboardInterrupt:
+            logger.info("Shutting down ...")
+            break
+        except Exception, e:
+            logger.exception(e)
+
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        logger.info("Shutting down ...")
-    except Exception, e:
-        logging.exception(e)
+    try_main()
